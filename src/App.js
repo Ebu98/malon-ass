@@ -1,130 +1,115 @@
-import React, { useEffect, useState } from "react";
-import { User } from "./components/User";
-import { AddUser } from "./components/AddUser";
-
+import React, { useContext, useState } from "react";
+import { Button, Table } from "reactstrap";
+import PostModal from "./components/modal";
+import { PostContext } from "./context/post";
 
 export default function App() {
-  const [posts, setUsers] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState("Add");
+  const [id, setId] = useState(null);
+  const [post, setPost] = useState({
+    title: "",
+    body: "",
+    userId: null,
+  });
+  const { posts, onAdd, onEdit, onDelete } = useContext(PostContext);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const onChange = (e) => setPost({ ...post, [e.target.name]: e.target.value });
 
-  const fetchData = async () => {
-    await fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((data) => setUsers(data))
-      .catch((error) => console.log(error));
-  };
-  
-  // fetch("https://jsonplaceholder.typicode.com/posts")
-  // .then((response) => response.json())
-  // .then((json) => console.log(json));
-
-  const onAdd = async (id, title, body, userId) => {
-    await fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: "POST",
-      body: JSON.stringify({
-        id: id,
-        title: title,
-        body: body,
-        userId: userId,
-      }),
-      
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }
-
-    })
-      .then((response) => {
-        if (response.status !== 201) {
-          return;
-        } else {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        setUsers((posts) => [...posts, data]);
-      })
-      .catch((error) => console.log(error));
-      
-  };
-  
-  const onEdit = async (id, title, body, userId) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        id: id,
-        title: title,
-        body: body,
-        userId: userId,
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          return;
-        } else {
-          return response.json();
-        }
-      })
-      
-      .then((data) => {
-        // setUsers((posts) => [...posts, data]);
-        const updatedPosts = posts.map((post) => {
-          if (post.id === id) {
-            post.title = title;
-            post.body = body;
-            post.userId = userId;
-          }
-          return post;
-          
-        });
-        setUsers((posts) => updatedPosts);
-        
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const onDelete = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE"
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          return;
-        } else {
-          setUsers(
-            posts.filter((post) => {
-              return post.id !== id;
-            })
-          );
-        }
-      })
-      .catch((error) => console.log(error));
+  const onSubmit = () => {
+    setIsOpen(false);
+    if (mode === "Edit") {
+      onEdit({ id, ...post });
+      return;
+    }
+    if (mode === "Delete") {
+      onDelete(id);
+      return;
+    }
+    onAdd(post);
   };
 
   return (
-    <div className="App">
-      <h1>Posts</h1>
-      <AddUser onAdd={onAdd} />
-      {posts.map((post) => (
-        <User
-          id={post.id}
-          key={post.id}
-          title={post.title}
-          body={post.body}
-          userId={post.userId}
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
-      ))}
+    <div className="app">
+      <div className="d-flex align-items-center justify-content-between my-3">
+        <div>
+          <h3>JPH</h3>
+        </div>
+        <div>
+          <Button
+            color="primary"
+            onClick={() => {
+              setPost({});
+              setMode("Add");
+              setIsOpen(true);
+            }}
+          >
+            Add Post
+          </Button>
+        </div>
+      </div>
+      <div className="table-wrapper">
+        {posts.length ? (
+          <Table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>User ID</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.title}</td>
+                  <td>{item.body}</td>
+                  <td>{item.userId}</td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        setId(item.id);
+                        setPost(item);
+                        setMode("Edit");
+                        setIsOpen(true);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      color="danger"
+                      onClick={() => {
+                        setId(item.id);
+                        setMode("Delete");
+                        setIsOpen(true);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>No post yet...</p>
+        )}
+      </div>
+      <PostModal
+        isOpen={isOpen}
+        mode={mode}
+        post={post}
+        onChange={onChange}
+        toggle={() => setIsOpen(!isOpen)}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }
 
 // https://codesandbox.io/s/ey0w4?file=/src/styles.css:68-83
-
-

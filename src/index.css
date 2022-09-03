@@ -1,13 +1,23 @@
-htyml,
+html,
 body {
   margin: 0;
   padding: 0;
   font-family: "Trebuchet MS", Arial, sans-serif;
 
 }
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+.app {
+  max-width: 1380px;
+  margin: auto;
+  padding: 0 2em;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 900px) {
+  .table-wrapper table {
+    width: 200%;
+  }
 }
