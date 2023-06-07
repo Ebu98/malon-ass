@@ -96,3 +96,18 @@ const PostProvider = ({ children }) => {
 };
 
 export default PostProvider;
+
+
+
+{/* <select value={bankName} onChange={(e) => setBankName(e.target.value)}>
+        <option value="">Select Bank</option>
+        {banks.map((bank) => (
+          <option key={bank.value} value={bank.value}>
+            {bank.name}
+          </option>
+        ))}
+        </select> */}
+
+        // https://meet.google.com/ftg-xunz-cgv
+
+

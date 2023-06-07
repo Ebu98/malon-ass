@@ -23,7 +23,7 @@ const PostModal = ({ isOpen, toggle, mode, onSubmit, onChange, post }) => {
               value={post.title}
               onChange={onChange}
               placeholder="Enter Post Title"
-              required
+              required={true}
             />
             <br />
             <Input
@@ -32,7 +32,7 @@ const PostModal = ({ isOpen, toggle, mode, onSubmit, onChange, post }) => {
               value={post.userId}
               onChange={onChange}
               placeholder="Enter User Id"
-              required
+              required={true}
             />
             <br />
             <Input
@@ -41,7 +41,7 @@ const PostModal = ({ isOpen, toggle, mode, onSubmit, onChange, post }) => {
               value={post.body}
               onChange={onChange}
               placeholder="Enter Post Body"
-              required
+              required={true}
             />
             <br />
           </>

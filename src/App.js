@@ -57,8 +57,6 @@ export default function App() {
                 <th>Title</th>
                 <th>Body</th>
                 <th>User ID</th>
-                <th></th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
