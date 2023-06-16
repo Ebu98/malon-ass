@@ -110,4 +110,4 @@ export default PostProvider;
         // https://www.figma.com/file/aNrYJS9BEwLmPU5z5ddPXZ/Login-%26-Signup-Screen-for-Web-(Community)?type=design&node-id=0-1&t=w8JnJGMNkR4Gs3y1-0
 
 
-        // https://meet.google.com/bab-kqri-frt
+        // https://meet.google.com/myp-orik-hnv
