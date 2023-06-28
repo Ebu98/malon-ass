@@ -109,4 +109,14 @@ export default PostProvider;
         </select> */}
         // https://www.figma.com/file/aNrYJS9BEwLmPU5z5ddPXZ/Login-%26-Signup-Screen-for-Web-(Community)?type=design&node-id=0-1&t=w8JnJGMNkR4Gs3y1-0
 
-        https://meet.google.com/irs-ziim-zhf
+//         <IfModule mod_rewrite.c>
+
+//   RewriteEngine On
+//   RewriteBase /
+//   RewriteRule ^index\.html$ - [L]
+//   RewriteCond %{REQUEST_FILENAME} !-f
+//   RewriteCond %{REQUEST_FILENAME} !-d
+//   RewriteCond %{REQUEST_FILENAME} !-l
+//   RewriteRule . /index.html [L]
+
+// </IfModule>
