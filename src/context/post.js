@@ -109,16 +109,76 @@ export default PostProvider;
         </select> */}
         // https://www.figma.com/file/aNrYJS9BEwLmPU5z5ddPXZ/Login-%26-Signup-Screen-for-Web-(Community)?type=design&node-id=0-1&t=w8JnJGMNkR4Gs3y1-0
 
-//         <IfModule mod_rewrite.c>
+        // import React, { useState, useEffect } from 'react';
 
-//   RewriteEngine On
-//   RewriteBase /
-//   RewriteRule ^index\.html$ - [L]
-//   RewriteCond %{REQUEST_FILENAME} !-f
-//   RewriteCond %{REQUEST_FILENAME} !-d
-//   RewriteCond %{REQUEST_FILENAME} !-l
-//   RewriteRule . /index.html [L]
-
-// </IfModule>
-
-https://meet.google.com/ptd-pexu-wuu
+        // const PaginatedDataComponent = () => {
+        //   const [data, setData] = useState([]);
+        //   const [currentPage, setCurrentPage] = useState(1);
+        //   const [loading, setLoading] = useState(false);
+        
+        //   useEffect(() => {
+        //     const fetchData = async () => {
+        //       setLoading(true);
+        //       try {
+        //         const response = await fetch(`https://api.example.com/data?page=${currentPage}`);
+        //         const json = await response.json();
+        //         setData(json.data);
+        //       } catch (error) {
+        //         console.error('Error:', error);
+        //       } finally {
+        //         setLoading(false);
+        //       }
+        //     };
+        
+        //     fetchData();
+        //   }, [currentPage]);
+        
+        //   const handlePreviousPage = () => {
+        //     if (currentPage > 1) {
+        //       setCurrentPage(currentPage - 1);
+        //     }
+        //   };
+        
+        //   const handleNextPage = () => {
+        //     setCurrentPage(currentPage + 1);
+        //   };
+        
+        //   return (
+        //     <div>
+        //       {loading ? (
+        //         <p>Loading...</p>
+        //       ) : (
+        //         <>
+        //           <table>
+        //             <thead>
+        //               <tr>
+        //                 <th>Name</th>
+        //                 <th>IGG</th>
+        //                 <th>Email</th>
+        //               </tr>
+        //             </thead>
+        //             <tbody>
+        //               {data.map((item) => (
+        //                 <tr key={item.id}>
+        //                   <td>{item.name}</td>
+        //                   <td>{item.igg}</td>
+        //                   <td>{item.email}</td>
+        //                 </tr>
+        //               ))}
+        //             </tbody>
+        //           </table>
+        
+        //           <div>
+        //             <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+        //               Previous
+        //             </button>
+        //             <button onClick={handleNextPage}>Next</button>
+        //           </div>
+        //         </>
+        //       )}
+        //     </div>
+        //   );
+        // };
+        
+        // export default PaginatedDataComponent;
+        
