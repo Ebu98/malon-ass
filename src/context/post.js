@@ -109,4 +109,57 @@ export default PostProvider;
         </select> */}
         // https://www.figma.com/file/aNrYJS9BEwLmPU5z5ddPXZ/Login-%26-Signup-Screen-for-Web-(Community)?type=design&node-id=0-1&t=w8JnJGMNkR4Gs3y1-0
 
-        // https://meet.google.com/vor-chgr-ewq
+        import React, { useEffect } from 'react';
+
+const MyComponent = () => {
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        // Perform the POST request
+        const postResponse = await fetch('https://api.example.com/post', {
+          method: 'POST',
+          body: JSON.stringify({}),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!postResponse.ok) {
+          throw new Error('Failed to perform the POST request');
+        }
+
+        // Process the POST response
+        const postData = await postResponse.json();
+
+        // Call the two GET functions concurrently
+        const [getResponse1, getResponse2] = await Promise.all([
+          fetch('https://api.example.com/get1'),
+          fetch('https://api.example.com/get2'),
+        ]);
+
+        if (!getResponse1.ok || !getResponse2.ok) {
+          throw new Error('Failed to perform one or both GET requests');
+        }
+
+        // Process the GET responses
+        const getData1 = await getResponse1.json();
+        const getData2 = await getResponse2.json();
+
+        // Handle the data
+        console.log('POST data:', postData);
+        console.log('GET data 1:', getData1);
+        console.log('GET data 2:', getData2);
+
+        // Perform further actions with the data...
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    postData();
+  }, []);
+
+  return <div>Component content</div>;
+};
+
+export default MyComponent;
